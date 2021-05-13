@@ -7846,7 +7846,7 @@ terminator_EnumerateInstanceExtensionProperties(const VkEnumerateInstanceExtensi
     }
 
 out:
-
+    loader_destroy_generic_list(NULL, (struct loader_generic_list *)&icd_tramp_list);
     loader_destroy_generic_list(NULL, (struct loader_generic_list *)&local_ext_list);
     loaderDeleteLayerListAndProperties(NULL, &instance_layers);
     return res;
@@ -8235,7 +8235,6 @@ out:
             }
             loader_instance_heap_free(inst, new_phys_dev_groups);
         }
-        total_count = 0;
     } else {
         // Free everything that didn't carry over to the new array of
         // physical device groups
